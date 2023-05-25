@@ -6,9 +6,11 @@ class Game {
     constructor() {
         this.missed = 0;
         this.phrases = [
-            new Phrase("yes"), 
-            // new Phrase("This is a second phrase"), 
-            // new Phrase("New phrase NUMBER 3")
+            new Phrase("first phrase"), 
+            new Phrase("second phrase"), 
+            new Phrase("third one"),
+            new Phrase("fourth phrase"),
+            new Phrase("last and final phrase")
         ];
         this.activePhrase = null;
     }
@@ -25,11 +27,10 @@ class Game {
     startGame() {
         const overlay = document.getElementById("overlay");
         overlay.style.display = "none";
-        
+       
         this.activePhrase = this.getRandomPhrase();
-        console.log(this.activePhrase);
         this.activePhrase.addPhraseToDisplay();
-
+        console.log(this.activePhrase);
     };
 
     /**
@@ -65,9 +66,9 @@ class Game {
         if(this.activePhrase.checkLetter(letter) === false) {
             scoreboard.src = "images/lostHeart.png";
             this.missed += 1;
-
-            const tries = document.querySelectorAll('[src="images/liveHeart.png"]');
-            if(tries.length == 0) {
+            
+            // const tries = document.querySelectorAll('[src="images/liveHeart.png"]');
+            if(this.missed == 5) {
                 this.gameOver(false);
             }
         } else {
@@ -102,7 +103,45 @@ class Game {
             addOverlayClass("lose");
             gameOverMessage.innerHTML = "You lose!  Good day, sir!";
         }
+
+        // get app ready for a new game
+        this.missed = 0;
+        const phrase_section = document.querySelector("#phrase ul");
+        const enableBtns = document.querySelectorAll(".key");
+        const resetScoreboard = document.querySelectorAll('[src="images/lostHeart.png"]');
+
+        phrase_section.replaceChildren();
+
+        enableBtns.forEach(key => key.classList.remove("chosen", "wrong"));
+        enableBtns.forEach(key => key.disabled = false);
+
+        resetScoreboard.forEach(life => life.src = "images/liveHeart.png");
+
+
+
         
+    };
+
+    /**
+    * Handles onscreen keyboard button clicks
+    * @param (HTMLButtonElement) button - The clicked button element
+    */
+    handleInteraction(button) {
+        button.disabled = true;
+        let buttonLetter = button.innerHTML;
+        let letterCheck = this.activePhrase.checkLetter(buttonLetter);
+        
+        if(letterCheck === false) {
+            button.classList.add("wrong");
+            this.removeLife();
+        } else {
+            button.classList.add("chosen");
+            this.activePhrase.showMatchedLetter(buttonLetter);
+
+            if(this.checkForWin() === true) {
+                this.gameOver(true);
+            }
+        }
     };
 
 

@@ -7,10 +7,17 @@
 
 let game;
 const btn_reset = document.getElementById("btn__reset");
+const keys = document.getElementById("qwerty");
 
 btn_reset.addEventListener("click", function() {
     game = new Game();
     game.startGame();
+});
+
+keys.addEventListener('click', function (event) {
+	if (event.target.matches(".key")) {
+		game.handleInteraction(event.target);
+	}
 });
 
 
