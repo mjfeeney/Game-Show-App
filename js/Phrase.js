@@ -56,8 +56,6 @@ class Phrase {
         matchedLetter.forEach(el => el.classList.add("show"));
       }
     };
-      
-
 };
 
 
