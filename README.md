@@ -12,7 +12,7 @@ If the player completes the phrase before they run out of guesses, a winning scr
 
 A player can guess a letter only once. After they’ve guessed a letter, your programming will need to disable that letter on the onscreen keyboard.
 
-<!-- Extra Credit - Custom Styles -->
+Extra Credit - Custom Styles:
 
 - Changed font-family to "Tahoma"
 - Added animation to #game-over-message
