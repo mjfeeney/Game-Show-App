@@ -3,20 +3,15 @@
  * Phrase.js */
 
 
-/*
-
-The class should include a constructor that receives a phrase parameter and initializes the following properties:
-
-phrase: this is the actual phrase the Phrase object is representing. This property should be set to the phrase parameter, but converted to all lower case.
-*/
-
-
 // Declaration
 class Phrase {
     constructor(phrase) {
       this.phrase = phrase.toLowerCase();
     }
 
+    /**
+    * Adds li elements to index.html for each individual letter of the random phrase.
+    */
     addPhraseToDisplay() {
       const phrase_section = document.querySelector("#phrase ul");
 
@@ -35,19 +30,15 @@ class Phrase {
     * Checks if passed letter is in phrase
     * @param (string) letter - Letter to check
     */
-
     checkLetter(letter) {
       // Checks to see if the letter selected by the player matches a letter in the phrase.
       let result = game.activePhrase.phrase.includes(letter);
   
       if(result) {
-        // console.log("letter matches!");
         return true;
       } else {
-        // console.log("NO match!");
         return false;
       }
-
     };
 
     /**
@@ -63,8 +54,7 @@ class Phrase {
         const matchedLetter = document.querySelectorAll(matchedClass);
         matchedLetter.forEach(el => el.classList.remove("hide"));
         matchedLetter.forEach(el => el.classList.add("show"));
-      } 
-
+      }
     };
       
 

@@ -2,21 +2,22 @@
  * Project 4 - OOP Game App
  * Game.js */
 
+// Declaration
 class Game {
     constructor() {
         this.missed = 0;
         this.phrases = [
-            new Phrase("first phrase"), 
-            new Phrase("second phrase"), 
-            new Phrase("third one"),
-            new Phrase("fourth phrase"),
-            new Phrase("last and final phrase")
+            new Phrase("The dude abides"), 
+            new Phrase("This aggression will not stand"), 
+            new Phrase("Obviously you are not a golfer"),
+            new Phrase("The rug really tied the room together"),
+            new Phrase("I am the walrus")
         ];
         this.activePhrase = null;
     }
 
     /**
-    * Selects random phrase from phrases property
+    * Selects random phrase from phrases array
     * @return {Object} Phrase object chosen to be used
     */
     getRandomPhrase() {
@@ -24,13 +25,17 @@ class Game {
         return this.phrases[randomNumber];
     };
 
+    /**
+    * Hides the start screen overlay and displays the game board
+    * Sets the 'activePhrase` property to a random phrase
+    * Calls the `addPhraseToDisplay()` method on the active phrase
+    */
     startGame() {
         const overlay = document.getElementById("overlay");
         overlay.style.display = "none";
        
         this.activePhrase = this.getRandomPhrase();
         this.activePhrase.addPhraseToDisplay();
-        console.log(this.activePhrase);
     };
 
     /**
@@ -49,7 +54,6 @@ class Game {
         } else {
             return false;
         }
-
     };
 
     /**
@@ -57,9 +61,6 @@ class Game {
     * Removes a life from the scoreboard
     * Checks if player has remaining lives and ends game if player is out
     */
-
-    // This method removes a life from the scoreboard, by replacing one of the `liveHeart.png` images with a `lostHeart.png` image (found in the `images` folder) and increments the `missed` property. If the player has five missed guesses (i.e they're out of lives), then end the game by calling the `gameOver()` method.
-
     removeLife(letter) {
         const scoreboard = document.querySelector('[src="images/liveHeart.png"]');
      
@@ -71,8 +72,6 @@ class Game {
             if(this.missed == 5) {
                 this.gameOver(false);
             }
-        } else {
-            console.log("matched letter")
         }
     };
 
@@ -97,14 +96,14 @@ class Game {
         if(gameWon === true) {
             removeOverlayClass("lose");
             addOverlayClass("win");
-            gameOverMessage.innerHTML = "You've won!!'";
+            gameOverMessage.innerHTML = "Great job! You've guessed it!";
         } else {
             removeOverlayClass("win");
             addOverlayClass("lose");
-            gameOverMessage.innerHTML = "You lose!  Good day, sir!";
+            gameOverMessage.innerHTML = "Condolences! The bums lost!";
         }
 
-        // get app ready for a new game
+        // Resetting the gameboard - get app ready for a new game
         this.missed = 0;
         const phrase_section = document.querySelector("#phrase ul");
         const enableBtns = document.querySelectorAll(".key");
@@ -116,9 +115,6 @@ class Game {
         enableBtns.forEach(key => key.disabled = false);
 
         resetScoreboard.forEach(life => life.src = "images/liveHeart.png");
-
-
-
         
     };
 
@@ -143,7 +139,6 @@ class Game {
             }
         }
     };
-
 
 }
 

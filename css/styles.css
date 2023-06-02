@@ -20,7 +20,8 @@
 
 * {
   box-sizing: border-box;
-  font-family: 'Montserrat', sans-serif;
+  /* font-family: 'Montserrat', sans-serif; */
+  font-family: "Tahoma", sans-serif;
 }
 
 body {
@@ -40,6 +41,7 @@ h2 {
   text-transform: uppercase;
   font-size: var(--font-size-large);
   margin: 0;
+  
 }
 
 h1 {
@@ -120,8 +122,13 @@ button {
   border-radius: 5px;
   -webkit-animation-duration: .5s;
   animation-duration: .5s;
+  animation: keySpin .6s;
 }
 
+@keyframes keySpin {
+  from {transform: rotateY(0deg)}
+  to {transform: rotateY(360deg)}
+}
 
 /* Keyboard */
 
@@ -181,6 +188,9 @@ button {
 
 .start {
   background-color: #3a3f58;
+  background: url("../images/dude.jpeg") no-repeat;
+  background-size: cover;
+  background-position: right;
 }
 
 .start a {
@@ -189,6 +199,9 @@ button {
 
 .win {
   background-color: var(--color-win);
+  background: url("../images/win.jpeg") no-repeat;
+  background-size: cover;
+  background-position: right;
 }
 
 .win a {
@@ -197,8 +210,43 @@ button {
 
 .lose {
   background-color: #f5785f;
+  background: url("../images/lose.jpg") no-repeat;
+  background-size: cover;
+  background-position: right;
 }
 
 .lose a {
   color: var(--color-lose);
 }
+
+
+/* My custom styles */
+
+#game-over-message {
+  animation: crescendo .8s ease-in-out;
+}
+
+@keyframes gameMessage {
+  0% {scale: 1}
+  50% {scale: 2}
+  60% {scale: 2}
+  100% {scale: 1}
+}
+
+@keyframes crescendo {
+  0% {transform: scale(.7)}
+  33% {transform: scale(1.85)}
+  66% {transform: scale(.7)}
+  100% {transform: scale(1)}
+}
+
+.key {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 3px 3px;
+}
+
+
+
+
+
+
+
